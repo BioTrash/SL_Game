@@ -1,0 +1,33 @@
+.actionButton{
+    cursor: pointer;
+    border: none;
+    height:26.7vh;
+    width: 80vh;
+}
+
+#topLeft{
+    background-color:mediumvioletred;
+}
+
+#middleLeft{
+    background-color:greenyellow;
+}
+
+#bottomLeft{
+    background-color:blue;
+}
+
+#topRight{
+    background-color: red;
+    transform: translate(80vh, -80vh);
+}
+
+#middleRight{
+    background-color: green;
+    transform: translate(80vh, -80vh);
+}
+
+#bottomRight{
+    background-color: blueviolet;
+    transform: translate(80vh, -80vh);
+}

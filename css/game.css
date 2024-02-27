@@ -1,0 +1,33 @@
+html, body {
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+    background-size:cover;
+}
+
+#enemyDiv, #actionDiv{
+    display: block;
+    justify-content: center;
+    align-items: center;
+    position: absolute; 
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#enemy{
+    height: 80vh;
+    width: 80vh;
+    background-color: aquamarine;
+    border-radius: 50%;
+    cursor: pointer;
+    border: none;
+}
+
+#actionDiv{
+    height: 80vh;
+    width: 160vh;
+    background-color: brown;
+    border-radius: 50%;
+    overflow: hidden;
+}
