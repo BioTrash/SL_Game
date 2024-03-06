@@ -3,6 +3,17 @@
     border: none;
     height:26.7vh;
     width: 80vh;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    justify-content: center;
+    align-items: center;
+    font-size: 2vh;
+}
+
+#confirm{
+    height:15%;
+    width: 30%;
+    transform: translateY(200%);
 }
 
 #topLeft{
