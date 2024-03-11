@@ -16,7 +16,7 @@ html, body {
     border-radius: 50%;
 }
 
-#healthDiv, #resourceDiv{
+#healthDiv, #resourceDiv, #timeDiv{
     display: flex;
     position: absolute; 
     top: 0%;
@@ -28,6 +28,12 @@ html, body {
     justify-content: center;
     align-items: center;
     font-size: 2vh;
+}
+
+#timeDiv{
+    font-size: 1vh;
+    height: 2vh;
+    top: 5%;
 }
 
 #invisible{
@@ -49,16 +55,22 @@ html, body {
 #resourceDiv{
     background-color: gray;
     top:95%;
-    gap: 33vh;
+    gap: 40vh;
 }
 
-#currentHealth{
+#currentHealth, #timeLeft{
     display: flex;
     position: absolute; 
     top: 0%;
     background-color:red; 
     height: 5vh;
     width: 100%;
+}
+
+#timeLeft{
+    height: 2vh;
+    background-color: rgb(255, 115, 0);
+    top: 5%;
 }
 
 
