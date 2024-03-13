@@ -10,6 +10,8 @@
     <script src="js/game.js"></script>
 </head>
 <body>
+
+
     <div id="actionDiv">
         <button type="button" class="actionButton" id="topLeft"></button>
         <button type="button" class="actionButton" id="middleLeft"></button>
@@ -22,15 +24,16 @@
     <div id="currentHealth"></div>
     
     <div id="healthDiv">
-        <h1>Enemies Title</h1>
+        <h1>Kalmar Union</h1>
     </div>
 
     <div id="timeLeft"></div>
     
     <div id="timeDiv">
-        <h1>Year 1500</h1>
+        <h1 id="currentYear">Year 1521</h1>
     </div>
 
+    <div id="enemyBorder"></div>
     <div id="enemyDiv">
         <button type="button" id="enemy"></button>
     </div>
@@ -42,7 +45,28 @@
     </div>
 
     <div id="invisible">
+        <h1 id="expo">The year is 1521, as the result of the increasing influence of Danish nobels and the following Stockholm Bloodbath, Sweden has decided to secede from the Danish dominated Kalmar Union. It is now your mission to lead Sweden to victory against what is left of the Union, including Denmark and Norway.</h1>
         <button type="button" class="actionButton" id="confirm">CONTINUE</button>
     </div>
+
+    <div id="expoDiv">
+        <button type="button" class="expoButton" id="expoLeft">?</button>
+        <button type="button" class="expoButton" id="expoRight">?</button>
+    </div>
+
+    <div id="costDiv">
+        <button type="button" class="expoCostButton" id="expoTopLeft">900</button>
+        <button type="button" class="expoCostButton" id="expoMiddleLeft">2.0k</button>
+        <button type="button" class="expoCostButton" id="expoBottomLeft">10.0k</button>
+        <button type="button" class="expoCostButton" id="expoTopRight">400</button>
+        <button type="button" class="expoCostButton" id="expoMiddleRight">3.0k</button>
+        <button type="button" class="expoCostButton" id="expoBottomRight">10.0k</button>
+
+        <button type="button" class="expoCostButton" id="expoMiddleMetal">500</button>
+        <button type="button" class="expoCostButton" id="expoMiddleWood">1.5k</button>
+
+        <button type="button" class="expoCostButton" id="expoTopMetal">100</button>
+    </div>
+
 </body>
 </html>

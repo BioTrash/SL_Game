@@ -8,37 +8,137 @@
     justify-content: center;
     align-items: center;
     font-size: 2vh;
+    background-position: 0vh;
 }
+
+.expoButton, .expoCostButton{
+    cursor: pointer;
+    border-radius: 50%;
+    height:7.5vh;
+    width: 7.5vh;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    justify-content: center;
+    align-items: center;
+    font-size: 4vh;
+    border: none;
+    color: white;
+    position: absolute;
+}
+
+#expoLeft{
+    transform: translate(-75vh, -40vh);
+    background-image: url("/images/coin.png");
+    background-size: cover;
+    height:5vh;
+    width: 5vh;
+}
+
+#expoRight{
+    transform: translate(75vh, -40vh);
+    background-image: url("/images/shield.png");
+    background-size: cover;
+    height:5vh;
+    width: 5vh;
+}
+
+.expoCostButton{
+    background-image: url("/images/coin.png");
+    background-size: cover;
+    font-size: 2vh;
+}
+
+#expoTopLeft{
+    transform: translate(-67vh, -22vh);
+}
+
+#expoMiddleLeft{
+    transform: translate(-78vh, -4vh);
+}
+
+#expoBottomLeft{
+    transform: translate(-67vh, 14vh);
+}
+
+#expoTopRight{
+    transform: translate(59.5vh, -22vh);
+}
+
+#expoTopMetal{
+    transform: translate(50vh, -28vh);
+    background-image: url("/images/iron.png");
+}
+
+
+#expoMiddleRight{
+    transform: translate(70.5vh, -4vh);
+}
+
+#expoMiddleMetal{
+    transform: translate(68vh, -12vh);
+    background-image: url("/images/iron.png");
+}
+
+#expoMiddleWood{
+    transform: translate(68vh, 4vh);
+    background-image: url("/images/plank.png");
+}
+
+#expoBottomRight{
+    transform: translate(59.5vh, 14vh);
+}
+
 
 #confirm{
     height:15%;
     width: 30%;
-    transform: translateY(200%);
+}
+
+#enemy{
+    background-image: url("/images/scandinavia_1523.jpg");
+    background-size: cover;
 }
 
 #topLeft{
     background-color:mediumvioletred;
+    background-image: url("/images/lumber.png");
+    background-size: 75vh;
 }
 
 #middleLeft{
     background-color:greenyellow;
+    background-image: url("/images/mine.png");
+    background-size: 45vh;
+    
 }
 
 #bottomLeft{
     background-color:blue;
+    background-image: url("/images/trade.png");
+    background-size: 75vh;
+    background-position:bottom;
 }
 
 #topRight{
     background-color: red;
     transform: translate(80vh, -80vh);
+    background-image: url("/images/army.png");
+    background-size: 75vh;
+    background-position:top;
 }
 
 #middleRight{
     background-color: green;
     transform: translate(80vh, -80vh);
+    background-image: url("/images/fleet.png");
+    background-size: 60vh;
+    background-position: right;
 }
 
 #bottomRight{
     background-color: blueviolet;
-    transform: translate(80vh, -80vh);
+    transform: translate(80vh, -80.1vh);
+    background-image: url("/images/merc.png");
+    background-size: 75vh;
+    background-position: right;
 }

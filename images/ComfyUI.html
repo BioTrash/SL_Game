@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en" style="--fg-color: #fff; --bg-color: #202020; --comfy-menu-bg: #353535; --comfy-input-bg: #222; --input-text: #ddd; --descrip-text: #999; --drag-text: #ccc; --error-text: #ff4444; --border-color: #4e4e4e; --tr-even-bg-color: #222; --tr-odd-bg-color: #353535;"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta charset="UTF-8">
+		<title>ComfyUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+		<link rel="stylesheet" type="text/css" href="ComfyUI_files/litegraph.css">
+		<link rel="stylesheet" type="text/css" href="ComfyUI_files/style.css">
+		<link rel="stylesheet" type="text/css" href="ComfyUI_files/user.css">
+		<script type="text/javascript" src="ComfyUI_files/litegraph.core.js"></script>
+		<script type="text/javascript" src="ComfyUI_files/litegraph.extensions.js" defer="defer"></script>
+		<script type="module">
+			import { app } from "./scripts/app.js";
+			await app.setup();
+			window.app = app;
+			window.graph = app.graph;
+		</script>
+	<style>
+.cm-menu-container {
+  column-gap: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.cm-menu-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.cm-title {
+	padding: 10px 10px 0 10p;
+	background-color: black;
+	text-align: center;
+	height: 45px;
+}
+</style><style>
+        .draggable-item {
+            position: relative;
+            will-change: transform;
+            user-select: none;
+        }
+        .draggable-item.is-idle {
+            transition: 0.25s ease transform;
+        }
+        .draggable-item.is-draggable {
+            z-index: 10;
+        }
+    </style><link rel="stylesheet" type="text/css" href="ComfyUI_files/groupNodeManage.css"><style>
+#cm-manager-dialog {
+	width: 1000px;
+	height: 520px;
+	box-sizing: content-box;
+	z-index: 10000;
+}
+
+.cb-widget {
+	width: 400px;
+	height: 25px;
+	box-sizing: border-box;
+	z-index: 10000;
+	margin-top: 10px;
+	margin-bottom: 5px;
+}
+
+.cb-widget-input {
+	width: 305px;
+	height: 25px;
+	box-sizing: border-box;
+}
+.cb-widget-input:disabled {
+	background-color: #444444;
+	color: white;
+}
+
+.cb-widget-input-label {
+	width: 90px;
+	height: 25px;
+	box-sizing: border-box;
+	color: white;
+	text-align: right;
+	display: inline-block;
+	margin-right: 5px;
+}
+
+.cm-menu-container {
+	column-gap: 20px;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	box-sizing: content-box;
+}
+
+.cm-menu-column {
+	display: flex;
+	flex-direction: column;
+	flex: 1 1 auto;
+	width: 300px;
+	box-sizing: content-box;
+}
+
+.cm-title {
+	background-color: black;
+	text-align: center;
+	height: 40px;
+	width: calc(100% - 10px);
+	font-weight: bold;
+	justify-content: center;
+	align-content: center;
+	vertical-align: middle;
+}
+
+#cm-channel-badge {
+	color: white;
+	background-color: #AA0000;
+	width: 220px;
+	height: 23px;
+	font-size: 13px;
+	border-radius: 5px;
+	left: 5px;
+	top: 5px;
+	align-content: center;
+	justify-content: center;
+	text-align: center;
+	font-weight: bold;
+	float: left;
+	vertical-align: middle;
+	position: relative;
+}
+
+#custom-nodes-grid a {
+	color: #5555FF;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+#custom-nodes-grid a:hover {
+	color: #7777FF;
+	text-decoration: underline;
+}
+
+#external-models-grid a {
+	color: #5555FF;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+#external-models-grid a:hover {
+	color: #7777FF;
+	text-decoration: underline;
+}
+
+#alternatives-grid a {
+	color: #5555FF;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+#alternatives-grid a:hover {
+	color: #7777FF;
+	text-decoration: underline;
+}
+
+.cm-notice-board {
+	width: 290px;
+	height: 270px;
+	overflow: auto;
+	color: var(--input-text);
+	border: 1px solid var(--descrip-text);
+	padding: 5px 10px;
+	overflow-x: hidden;
+	box-sizing: content-box;
+}
+
+.cm-notice-board > ul {
+	display: block;
+	list-style-type: disc;
+	margin-block-start: 1em;
+	margin-block-end: 1em;
+	margin-inline-start: 0px;
+	margin-inline-end: 0px;
+	padding-inline-start: 40px;
+}
+
+.cm-conflicted-nodes-text {
+	background-color: #CCCC55 !important;
+	color: #AA3333 !important;
+	font-size: 10px;
+	border-radius: 5px;
+	padding: 10px;
+}
+
+.cm-warn-note {
+	background-color: #101010 !important;
+	color: #FF3800 !important;
+	font-size: 13px;
+	border-radius: 5px;
+	padding: 10px;
+	overflow-x: hidden;
+	overflow: auto;
+}
+
+.cm-info-note {
+	background-color: #101010 !important;
+	color: #FF3800 !important;
+	font-size: 13px;
+	border-radius: 5px;
+	padding: 10px;
+	overflow-x: hidden;
+	overflow: auto;
+}
+</style><style>
+#workflowgallery-button {
+	width: 310px;
+	height: 27px;
+	padding: 0px !important;
+	position: relative;
+	overflow: hidden;
+	font-size: 17px !important;
+}
+#cm-nodeinfo-button {
+	width: 310px;
+	height: 27px;
+	padding: 0px !important;
+	position: relative;
+	overflow: hidden;
+	font-size: 17px !important;
+}
+#cm-manual-button {
+	width: 310px;
+	height: 27px;
+	position: relative;
+	overflow: hidden;
+}
+
+.cm-button {
+	width: 310px;
+	height: 30px;
+	position: relative;
+	overflow: hidden;
+	font-size: 17px !important;
+}
+
+.cm-experimental-button {
+	width: 290px;
+	height: 30px;
+	position: relative;
+	overflow: hidden;
+	font-size: 17px !important;
+}
+
+.cm-experimental {
+	width: 310px;
+	border: 1px solid #555;
+	border-radius: 5px;
+	padding: 10px;
+	align-items: center;
+	text-align: center;
+	justify-content: center;
+	box-sizing: border-box;
+}
+
+.cm-experimental-legend {
+	margin-top: -20px;
+	margin-left: 50%;
+	width:auto;
+	height:20px;
+	font-size: 13px;
+	font-weight: bold;
+	background-color: #990000;
+	color: #CCFFFF;
+	border-radius: 5px;
+	text-align: center;
+	transform: translateX(-50%);
+	display: block;
+}
+
+.cm-menu-combo {
+	cursor: pointer;
+	width: 310px;
+	box-sizing: border-box;
+}
+
+.cm-small-button {
+	width: 120px;
+	height: 30px;
+	position: relative;
+	overflow: hidden;
+	box-sizing: border-box;
+	font-size: 17px !important;
+}
+
+#cm-install-customnodes-button {
+	width: 200px;
+	height: 30px;
+	position: relative;
+	overflow: hidden;
+	box-sizing: border-box;
+	font-size: 17px !important;
+}
+
+.cm-search-filter {
+	width: 200px;
+	height: 30px !important;
+	position: relative;
+	overflow: hidden;
+	box-sizing: border-box;
+}
+
+.cb-node-label {
+	width: 400px;
+	height:28px;
+	color: black;
+	background-color: #777777;
+	font-size: 18px;
+	text-align: center;
+	font-weight: bold;
+}
+
+#cm-close-button {
+	width: calc(100% - 65px);
+	bottom: 10px;
+	position: absolute;
+	overflow: hidden;
+}
+
+#cm-save-button {
+	width: calc(100% - 65px);
+	bottom:40px;
+	position: absolute;
+	overflow: hidden;
+}
+#cm-save-button:disabled {
+	background-color: #444444;
+}
+
+.pysssss-workflow-arrow-2 {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	font-size: 12px;
+	display: flex;
+	align-items: center;
+	width: 24px;
+	justify-content: center;
+	background: rgba(255,255,255,0.1);
+	content: "▼";
+}
+.pysssss-workflow-arrow-2:after {
+	content: "▼";
+ }
+ .pysssss-workflow-arrow-2:hover {
+	filter: brightness(1.6);
+	background-color: var(--comfy-menu-bg);
+ }
+.pysssss-workflow-popup-2 ~ .litecontextmenu {
+	transform: scale(1.3);
+}
+#workflowgallery-button-menu {
+	z-index: 10000000000 !important;
+}
+#cm-manual-button-menu {
+	z-index: 10000000000 !important;
+}
+</style></head>
+	<body class="litegraph" style=""><canvas style="touch-action: none;" id="graph-canvas" tabindex="1" class=" lgraphcanvas" width="1880" height="1051"></canvas>
+		<div id="comfy-user-selection" class="comfy-user-selection" style="display: none;">
+			<main class="comfy-user-selection-inner">
+				<h1>ComfyUI</h1>
+				<form>
+					<section>
+						<label>New user:
+							<input placeholder="Enter a username">
+						</label>
+					</section>
+					<div class="comfy-user-existing">
+						<span class="or-separator">OR</span>
+						<section>
+							<label>
+								Existing user:
+								<select>
+									<option hidden="" disabled="disabled" selected="selected" value=""> Select a user </option>
+								</select>
+							</label>
+						</section>
+					</div>
+					<footer>
+						<span class="comfy-user-error">&nbsp;</span>
+						<button class="comfy-btn comfy-user-button-next">Next</button>
+					</footer>
+				</form>
+			</main>
+		</div>
+	
+
+<style>
+        .comfy-logging-logs {
+            display: grid;
+            color: var(--fg-color);
+            white-space: pre-wrap;
+        }
+        .comfy-logging-log {
+            display: contents;
+        }
+        .comfy-logging-title {
+            background: var(--tr-even-bg-color);
+            font-weight: bold;
+            margin-bottom: 5px;
+            text-align: center;
+        }
+        .comfy-logging-log div {
+            background: var(--row-bg);
+            padding: 5px;
+        }
+    </style><input style="display: none;" type="file" accept=".json"><div class="comfy-modal"><div class="comfy-modal-content"><p></p><button type="button">Close</button></div></div><div class="comfy-modal"><div class="comfy-modal-content"><p></p><button type="button">Close</button></div></div><dialog id="comfy-settings-dialog"><table class="comfy-modal-content comfy-table"><caption>Settings<button class="comfy-btn" type="button">×</button></caption><tbody></tbody><button style="cursor: pointer;" type="button">Close</button></table></dialog><input style="display: none;" id="comfy-file-input" type="file" accept=".json,image/png,.latent,.safetensors,image/webp"><div class="comfy-menu-hamburger"><div></div><div></div><div></div></div><div class="comfy-menu"><div class="drag-handle comfy-menu-header" style="overflow: hidden; position: relative; width: 100%; cursor: default;"><span class="drag-handle"></span><span class="comfy-menu-queue-size">Queue size: 0</span><div class="comfy-menu-actions"><button class="comfy-settings-btn">⚙️</button><button class="comfy-close-menu-btn">×</button></div></div><button class="comfy-queue-btn" id="queue-button">Queue Prompt</button><div><label>Extra options<input type="checkbox"></label></div><div style="width: 100%; display: none;" id="extraOptions"><div><label>Batch count</label><input style="width: 35%; margin-left: 0.4em;" id="batchCountInputNumber" type="number" min="1" value="1"><input id="batchCountInputRange" type="range" min="1" max="100" value="1"></div><div><label for="autoQueueCheckbox">Auto Queue</label><input id="autoQueueCheckbox" type="checkbox" title="Automatically queue prompt when the queue size hits 0"><div class="comfy-toggle-switch" style="display: none;"><label title="A new prompt will be queued as soon as the queue reaches 0" class="comfy-toggle-selected">instant<input name="autoQueueMode" type="radio" value="instant" checked="checked"></label><label title="A new prompt will be queued when the queue is at 0 and the graph is/has changed">change<input name="autoQueueMode" type="radio" value="change"></label></div></div></div><div class="comfy-menu-btns"><button id="queue-front-button">Queue Front</button><button id="comfy-view-queue-button">Close</button><button id="comfy-view-history-button">View History</button></div><div class="comfy-list" style="display: block;"><h4>Running</h4><div class="comfy-list-items"></div><h4>Pending</h4><div class="comfy-list-items"></div><div class="comfy-list-actions"><button>Clear Queue</button><button>Refresh</button></div></div><div class="comfy-list" style="display: none;"></div><button id="comfy-save-button">Save</button><button style="width: 100%; display: none;" id="comfy-dev-save-api-button">Save (API Format)</button><button id="comfy-load-button">Load</button><button id="comfy-refresh-button">Refresh</button><button id="comfy-clipspace-button">Clipspace</button><button id="comfy-clear-button">Clear</button><button id="comfy-load-default-button">Load Default</button><hr style="margin: 20px 0px; width: 100%;"><button>Manager</button><button id="shareButton" style="background: linear-gradient(90deg, rgb(0, 201, 255) 0%, rgb(146, 254, 157) 100%); color: black; display: inline-block;">Share</button></div><div class="comfy-modal"><div class="comfy-modal-content"><p></p><button type="button">Clear</button><button type="button">Export logs...</button><button type="button">View exported logs...</button><button type="button">Close</button></div></div><input style="display: none;" type="file" accept=".json"><textarea class="comfy-multiline-input" placeholder="text" style="transform-origin: 0px 0px 0px; transform: matrix(1.21, 0, 0, 1.21, 0, 0); left: 179.692px; top: 1125.77px; width: 297.669px; height: 57.1759px; position: absolute; z-index: 3; will-change: clip-path; display: none;" hidden=""></textarea><textarea class="comfy-multiline-input" placeholder="text" style="transform-origin: 0px 0px 0px; transform: matrix(1, 0, 0, 1, 0, 0); left: 360.076px; top: 1120.75px; width: 303.069px; height: 52.4759px; position: absolute; z-index: 5; will-change: clip-path; display: none;" hidden="">blurry, bokeh</textarea><textarea class="comfy-multiline-input" placeholder="text" style="transform-origin: 0px 0px 0px; transform: matrix(1.331, 0, 0, 1.331, 0, 0); left: 697.267px; top: 943.735px; width: 405.278px; height: 134.606px; position: absolute; z-index: 18; will-change: clip-path; clip-path: polygon(0% 0%, 0% 100%, -18.9997px 100%, -18.9997px -287.75px, calc(418.845px) -287.75px, calc(418.845px) calc(-79.4367px), -18.9997px calc(-79.4367px), -18.9997px 100%, 100% 100%, 100% 0%);">UnrealisticDream, BadDrream, badhandv4, (text:1.1), watermark, patreon, autograph, wrong proportions, bad anatomy, modern</textarea><input type="file" accept="image/jpeg,image/png,image/webp" style="display: none;"><textarea class="comfy-multiline-input" placeholder="text" style="transform-origin: 0px 0px 0px; transform: matrix(1.331, 0, 0, 1.331, 0, 0); left: 695.936px; top: 660.233px; width: 402.845px; height: 118.313px; position: absolute; z-index: 22; will-change: clip-path;">landscape,
+ oil on matte canvas, sharp details, intricate, highly detailed, digital
+ painting, rich color, smooth, sharp focus, illustration,, Unreal Engine
+ 5, 8K, 
+
+swedish merchant (medieval:1.1) navy fleet, corvettes, frigates, 
+barques, swedish flags</textarea><div class="comfy-modal comfy-manage-templates"><div class="comfy-modal-content"><p></p><button type="button">Import</button><button type="button">Export</button><button type="button">Close</button></div></div><input style="display: none;" type="file" accept=".json" multiple=""></body></html>
